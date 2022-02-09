@@ -1,33 +1,406 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <!-- displays site properly based on user's device -->
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link
+                href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap"
+                rel="stylesheet"
+            />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Base Apparel coming soon page</title>
+            <link
+                rel="icon"
+                type="image/png"
+                sizes="32x32"
+                href="./images/favicon-32x32.png"
+            /> 
+            <script src="./index.js" defer></script>
+            <title>Frontend Mentor | Base Apparel coming soon page</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+            <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+            <style>
+                /* ------------------- */
+                /* Custom properties   */
+                /* ------------------- */
 
-  We're coming soon
+                :root {
+                    --clr-desaturated-red: 0 36% 70%;
+                    --clr-soft-red: 0 93% 68%;
+                    --clr-grayish-red: 0 6% 24%;
 
-  Hello fellow shoppers! We're currently building our new fashion store. 
-  Add your email below to stay up-to-date with announcements and our launch deals.
+                    --clr-grd-from: 0 0% 100%; 
+                    --clr-grd-to: 0 0% 98%;
 
-  Email Address
-  
-  <footer>
-    <p class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="#">Your Name Here</a>.
-    </p>
-  </footer>
-</body>
-</html>
+                    --clr-grd-from2: 0 80% 86% 
+                    --clr-grd-to2: 0 74% 74%
+
+                    /* paragraph */
+                    --clr-white: 0 0% 100%;
+                    /* background, headings, buttons */
+                    --clr-light-gray: 0 0% 95%;
+
+                    /* font size */
+
+                    --fs-paragraph: 1.1rem;
+
+
+                    /* font familiy*/
+                    --ff-josefin-sans: 'Josefin Sans', sans-serif;
+                    --ff-300: 300;
+                    --fw-400: 400;
+                    --ff-500: 600;
+                }
+
+
+                /* ------------------  */
+                /* Reset               */
+                /* ------------------- */
+
+                /* Box sizing */
+
+                *,
+                *::before,
+                *::after {
+                    box-sizing: border-box;
+                }
+
+                /* Reset margins */
+
+                body,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                p,
+                figure,
+                picture {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                /* set up the body */
+
+                body {
+                    line-height: 1.5;
+                    min-height: 100vh;
+                    font-family: var(--ff-josefin-sans);
+                    font-size: var(--fs-paragraph);
+                    background-image: url(./images/bg-pattern-desktop.svg);
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    color: hsl(var(--clr-white) / 0.75);
+                    overflow-x: hidden;
+                }
+
+                a {
+                    text-decoration: none;
+                }
+
+                /* make images easier to work with */
+
+                img,
+                picture {
+                    max-width: 100%;
+                    display: block;
+                }
+
+                /* make forms easier to work with */
+
+                input,
+                button,
+                textarea,
+                select {
+                    font: inherit;
+                }
+
+                /* making thickness universal */
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p {
+                    font-weight: var(--fw-500);
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                /* remove animations for people who have turned them off */
+
+                @media (prefers-reduced-motion: reduce) {
+                    *,
+                    *::before,
+                    *::after {
+                        animation-duration: 0.01ms !important;
+                        animation-iteration-count: 1 !important;
+                        transition-duration: 0.01ms !important;
+                        scroll-behavior: auto !important;
+                    }
+                }
+
+                .main-container{
+                    display: grid;
+                    grid-template-columns: auto;
+                    grid-template-rows: 70px auto auto;
+                    grid-template-areas: 
+                        "logo"
+                        "image"
+                        "content";
+                    gap: 2rem;
+                }
+
+                .wrapper{
+                    grid-area: content;
+                    padding-inline: 4rem;
+                }
+                .icon-container{
+                    margin-top: 2rem;
+                    display: grid;
+                    grid-area: logo;
+                    max-width: 50%;
+                }
+                
+                .icon{
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+                
+                .logo{
+                    background-image: url(./images/logo.svg);
+                }
+                .main-title{
+                    max-width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin: 0 auto;
+                    font-size: 4.6rem;
+                    text-align: center;
+                    padding: 2rem 3rem;
+                    color: hsl(var(--clr-grayish-red));
+                    line-height: 72px;
+                    font-weight: 600;
+                    letter-spacing: 0.5rem;
+                    text-transform: uppercase;
+                }
+
+                .main-title span{
+                    font-weight: 300;
+                    color: hsl(var(--clr-desaturated-red));
+                }
+
+                .main-paragraph{
+                    text-align: center;
+                    color: hsl(var(--clr-desaturated-red));
+                    padding-bottom: 2rem;
+                    font-size: clamp(1.4rem, 0.8vw + 1rem, 1.8rem);;
+
+                }
+
+
+                .image-container{
+                    width: 100%;
+                    grid-area: image;
+                }
+                
+                .image-container img{
+                    width: 100%;
+                    max-height: 600px;
+                    object-fit: contain;
+                }
+
+                .main-form{
+                    width: 100%;
+                    margin-bottom: 60px;
+                    position: relative;
+                }
+                .main-form input{
+                    width: 100%;
+                    padding: 1.3rem 1rem;
+                    border: 1px solid hsl(var(--clr-desaturated-red));
+                    border-radius: 50px;
+                    font-size: 1.2rem;
+                    color: hsl(var(--clr-soft-red));
+                    padding-inline-start: 2.5rem;
+
+                }
+                ::placeholder{
+                    font-size: 1.2rem;
+                    color: hsl(var(--clr-desaturated-red) / 0.36)
+                }
+
+                .main-form input:focus-visible,
+                .main-form input:hover{
+                    outline: none;
+                    border: 1.2px solid hsl(var(--clr-soft-red));
+                    box-shadow: 0 3px 19px 3px hsla(var(--clr-desaturated-red) / .6);
+                }
+
+                @media (min-width: 699px){
+                    .icon-container{
+                        max-width: 100%;
+                    }
+
+                    .main-paragraph{
+                        padding-inline: 2.5rem;
+                    }
+                    .main-form {
+                        padding-inline: 2.5rem;
+                    }
+                }
+                .button-container{
+                    background: linear-gradient(135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+                    position: absolute;
+                    display: grid;
+                    place-items: center;
+                    top: 1.1px;
+                    right: 0;
+                    border-radius: 70px;
+                    width: 7.5rem;
+                    aspect-ratio: 2/1.2;
+                    cursor: pointer;
+                    grid-template-rows: 0;
+                    transform: scale(1);
+                    transition: 400ms ease-out;
+                }
+                .button{
+                    margin: 0 auto;
+                    display: inline-block;
+                    background-image: url(./images/icon-arrow.svg);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    padding: 15px;
+                }
+                
+                .button-container:active,
+                .button-container:focus{
+                    /* (0, 0%, 100%), to hsl(0, 100%, 98%) */
+                    background: linear-gradient(155deg, hsl(0, 100%, 98%), hsl(0, 74%, 74%));
+                    box-shadow: 0 3px 25px 12px hsl(var(--clr-desaturated-red) / 0.8);
+                    transition: 400ms ease-in-out;
+                    transform: scale(0.90);
+                }
+                @media (min-width: 1024px){
+                    .main-container{
+                        grid-template-columns: 6rem 50% 45%;
+                        grid-template-rows:  10% 8% 82%;
+                        grid-template-areas: 
+                        ".... .... image"
+                        ".... logo image"
+                        ".... content image";
+                        gap: 0;
+                        min-height: 98vh;
+                    }
+                    .icon-container{
+                        max-width: 100%;
+                        margin-top: 0;
+                    }
+                    .icon{
+                        width: 25%;
+                        margin-inline: 50px;
+                        display: inline-block;
+                    }
+                    .main-title{
+                        margin: 0;
+                        padding: 0;
+                        padding-bottom: 2rem;
+                        text-align: left;
+                        align-items: flex-start;
+                    }
+                    .main-paragraph{
+                        padding: 0;
+                        text-align: start;
+                        padding-bottom: 2rem;
+                        width: 80%;
+                        font-size: 1.2rem;
+                    }
+
+                    .wrapper{
+                        margin-top: 80px;
+                        height: fit-content;
+                    }
+
+                    .main-form{
+                        padding: 0;
+                    }
+                    .image-container img{
+                        max-height: 100%;
+                        overflow: hidden;
+                        object-fit: cover;
+                    }
+
+                    .main-form{
+                        width: 80%;
+                    }
+
+                }
+                .error-message{
+                    display: inline-block;
+                    padding-inline-start: 2.5rem;
+                    color: hsl(var(--clr-soft-red));
+                    margin-top: 1rem;
+                }
+
+                .attribution {
+                    font-size: 11px;
+                    text-align: center;
+                }
+                .attribution a {
+                    color: hsl(228, 45%, 44%);
+                }
+                </style>
+        </head>
+        <body>
+
+            <main class="main-container">
+                <div class="icon-container">
+                    <span class="icon logo"></span>
+                </div>
+
+                <article class="wrapper">
+                    <h1 class="main-title"> <span>We're</span> coming soon </h1>
+                    <p class="main-paragraph">
+                        Hello fellow shoppers! We're currently building our new
+                        fashion store. Add your email below to stay up-to-date with announcements
+                        and our launch deals.
+                    </p>
+                    <form class="main-form">
+                        <input id="GET-name" type="text" name="email" placeholder="Email Address" required>
+                        <div id="error" class=""></div>
+                        <a href="">
+                            <div class="button-container">
+                                <a href="#" class="button"></a>
+                            </div>
+                        </a>
+                    </form>
+                </article>
+
+                <picture class="image-container">
+                    <source media="(min-width: 699px)" srcset="./images/hero-desktop.jpg">
+                    <img src="./images/hero-mobile.jpg" alt="">
+                </picture>
+            </main>
+
+
+            <footer>
+                <p class="attribution">
+                    Challenge by
+                    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+                        >Frontend Mentor</a
+                    >. Coded by <a href="#">Your Name Here</a>.
+                </p>
+            </footer>
+        </body>
+    </html>
